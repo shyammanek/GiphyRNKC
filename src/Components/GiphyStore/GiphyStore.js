@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -43,7 +43,6 @@ const GiphyStore = () => {
         : `https://api.giphy.com/v1/gifs/trending?offset=${offset}&api_key=xPd7f2rkxXllCCWZITxa8LCHrlRwmbuJ`;
 
       const response = await fetch(url);
-      console.log('🚀 ~ fetchGifs ~ url:', url);
       const data = await response.json();
 
       if (data.data.length > 0) {
@@ -92,7 +91,6 @@ const GiphyStore = () => {
   };
 
   const toggleTheme = () => {
-    console.log('toggleTheme');
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
@@ -208,7 +206,6 @@ const GiphyStore = () => {
   };
 
   const downloadGif = async (url, fileName) => {
-    console.log('🚀 ~ downloadGif ~ fileName:', fileName);
     const downloadDest = `${RNFS.DownloadDirectoryPath}/${fileName}`;
     try {
       RNFS.downloadFile({
@@ -286,6 +283,7 @@ const GiphyStore = () => {
             styles.searchInput,
             {
               borderColor: theme === 'dark' ? 'white' : 'grey',
+              color: theme === 'dark' ? 'white' : 'black',
             },
           ]}
           placeholderTextColor={theme === 'dark' ? 'white' : 'grey'}
